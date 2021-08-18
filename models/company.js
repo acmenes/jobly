@@ -94,13 +94,13 @@ class Company {
         `SELECT handle,
                 name,
                 description,
-                num_employees AS "numEmployees",
                 logo_url AS "logoUrl"
          FROM companies
          WHERE name CONTAINS $1
          ORDER BY name`,
          [name]);
-    const company = companiesRes.rows[0];
+    const companies = companiesRes.rows[0];
+    return companies
   }
 
   /** Filter by company size  */
@@ -112,9 +112,11 @@ class Company {
               num_employees AS "numEmployees",
               logo_url AS "logoUrl"
       FROM companies
-      WHERE num_employees > $1 AND num_employees < $2
+      WHERE num_employees BETWEEN $1 AND $2
       ORDER BY num_employees ASC`,
       [min, max]);
+      const companies = companiesRes.rows[0]
+      return companies
   }
 
   /** Update company data with `data`.
