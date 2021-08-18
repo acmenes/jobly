@@ -59,6 +59,17 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+router.get("/test", async function (req, res, next) {
+  try {
+    const name = req.query.name
+    const companies = await Company.filterName(name);
+    console.log(companies)
+    return res.json({ companies });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 /** GET /[handle]  =>  { company }
  *
  *  Company is { handle, name, description, numEmployees, logoUrl, jobs }

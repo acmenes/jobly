@@ -91,12 +91,9 @@ class Company {
 
   static async filterName(name) {
     const companiesRes = await db.query(
-        `SELECT handle,
-                name,
-                description,
-                logo_url AS "logoUrl"
+        `SELECT name
          FROM companies
-         WHERE name CONTAINS $1
+         WHERE name LIKE $1
          ORDER BY name`,
          [name]);
     const companies = companiesRes.rows[0];
