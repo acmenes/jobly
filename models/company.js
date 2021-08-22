@@ -90,6 +90,7 @@ class Company {
   /** Filter by company name */
 
   static async filterName(name) {
+    /// use %word% for like matching
     const companiesRes = await db.query(
         `SELECT name
          FROM companies
