@@ -1,11 +1,14 @@
 const { BadRequestError } = require("../expressError");
 
-// This helper is for making partial updates to the database. It takes the keys
-// of the objects users wish to update. This helper makes it so that users do not
-// have to enter data that they are not updating.
+/** This helper is for making partial updates to the database. It takes the keys
+* of the objects users wish to update. This helper makes it so that users do not
+* have to enter data that they are not updating.
 
-// if a user does not enter any keys to update, it will return an error, checking
-// the length of the keys passed in
+* if a user does not enter any keys to update, it will return an error, checking
+* the length of the keys passed in
+
+* this function also converts js to sql
+*/
 
 function sqlForPartialUpdate(dataToUpdate, jsToSql) {
   const keys = Object.keys(dataToUpdate);
