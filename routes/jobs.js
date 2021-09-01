@@ -17,8 +17,15 @@ const jobSearchSchema = require("../schemas/jobSearch.json")
 const router = new express.Router();
 
 router.get("/", async function (req, res, next){
+    const query = req.query;
+    if(query.minSalary !== undefined) query.minSalary = +query.minSalary;
+    query.hasEquity = query.hasEquity === "true";
+
     try {
-        const jobs = await Job.findAll();
+        const validator = jsonschema.validate(query, jobSearchSchema);
+        if(!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+        }
         return res.json({ jobs });
     } catch (err) {
         return next(err)
