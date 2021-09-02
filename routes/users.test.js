@@ -288,3 +288,11 @@ describe("DELETE /users/:username", function () {
     expect(resp.statusCode).toEqual(404);
   });
 });
+
+/**************************************** POST /users/:username/jobs/:id */
+
+describe("POST /users/:username/jobs/:id" , function (){
+  test("it allows users to apply", async function () {
+    
+  })
+});
